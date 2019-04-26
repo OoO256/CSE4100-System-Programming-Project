@@ -1,0 +1,6 @@
+how to compile : 
+    type 'make' on shell at the directory containing makefile
+    then all file will be compiled into 20171667.out with -Wall, -std=gnu99 options
+    
+how to execute :
+    execute 20171667.out
