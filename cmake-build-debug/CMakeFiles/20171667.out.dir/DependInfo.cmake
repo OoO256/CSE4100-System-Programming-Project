@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/linking_loader.c" "/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/cmake-build-debug/CMakeFiles/20171667.out.dir/linking_loader.c.o"
   "/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/memory.c" "/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/cmake-build-debug/CMakeFiles/20171667.out.dir/memory.c.o"
   "/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/opcode.c" "/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/cmake-build-debug/CMakeFiles/20171667.out.dir/opcode.c.o"
+  "/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/run.c" "/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/cmake-build-debug/CMakeFiles/20171667.out.dir/run.c.o"
   "/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/symbol.c" "/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/cmake-build-debug/CMakeFiles/20171667.out.dir/symbol.c.o"
   "/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/vector.c" "/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/cmake-build-debug/CMakeFiles/20171667.out.dir/vector.c.o"
   )

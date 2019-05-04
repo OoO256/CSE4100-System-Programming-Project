@@ -7,6 +7,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/20171667.out.dir/symbol.c.o"
   "CMakeFiles/20171667.out.dir/vector.c.o"
   "CMakeFiles/20171667.out.dir/linking_loader.c.o"
+  "CMakeFiles/20171667.out.dir/run.c.o"
   "20171667.out.pdb"
   "20171667.out"
 )

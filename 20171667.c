@@ -5,6 +5,7 @@
 #include "assembler.h"
 #include "symbol.h"
 #include "linking_loader.h"
+#include "run.h"
 
 #define COMMAND_IS(x) (!strcmp(command, (x)))
 
@@ -228,6 +229,11 @@ void parseCommand() {
             else if (COMMAND_IS("symbol")){
                 printSymbol();
                 addHistory(commandLine);
+            }
+            else if(COMMAND_IS("run")){
+                if (run() == SUCCESSFUL_RETURN){
+                    addHistory(commandLine);
+                }
             }
             else {
                 printf("Syntax error!\n");

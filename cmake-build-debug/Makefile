@@ -285,6 +285,33 @@ opcode.c.s:
 	$(MAKE) -f CMakeFiles/20171667.out.dir/build.make CMakeFiles/20171667.out.dir/opcode.c.s
 .PHONY : opcode.c.s
 
+run.o: run.c.o
+
+.PHONY : run.o
+
+# target to build an object file
+run.c.o:
+	$(MAKE) -f CMakeFiles/20171667.out.dir/build.make CMakeFiles/20171667.out.dir/run.c.o
+.PHONY : run.c.o
+
+run.i: run.c.i
+
+.PHONY : run.i
+
+# target to preprocess a source file
+run.c.i:
+	$(MAKE) -f CMakeFiles/20171667.out.dir/build.make CMakeFiles/20171667.out.dir/run.c.i
+.PHONY : run.c.i
+
+run.s: run.c.s
+
+.PHONY : run.s
+
+# target to generate assembly for a file
+run.c.s:
+	$(MAKE) -f CMakeFiles/20171667.out.dir/build.make CMakeFiles/20171667.out.dir/run.c.s
+.PHONY : run.c.s
+
 symbol.o: symbol.c.o
 
 .PHONY : symbol.o
@@ -366,6 +393,9 @@ help:
 	@echo "... opcode.o"
 	@echo "... opcode.i"
 	@echo "... opcode.s"
+	@echo "... run.o"
+	@echo "... run.i"
+	@echo "... run.s"
 	@echo "... symbol.o"
 	@echo "... symbol.i"
 	@echo "... symbol.s"

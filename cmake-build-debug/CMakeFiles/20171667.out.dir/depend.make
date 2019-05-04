@@ -8,6 +8,7 @@ CMakeFiles/20171667.out.dir/20171667.c.o: ../history.h
 CMakeFiles/20171667.out.dir/20171667.c.o: ../linking_loader.h
 CMakeFiles/20171667.out.dir/20171667.c.o: ../memory.h
 CMakeFiles/20171667.out.dir/20171667.c.o: ../opcode.h
+CMakeFiles/20171667.out.dir/20171667.c.o: ../run.h
 CMakeFiles/20171667.out.dir/20171667.c.o: ../symbol.h
 
 CMakeFiles/20171667.out.dir/assembler.c.o: ../20171667.h
@@ -33,6 +34,11 @@ CMakeFiles/20171667.out.dir/memory.c.o: ../memory.h
 CMakeFiles/20171667.out.dir/opcode.c.o: ../20171667.h
 CMakeFiles/20171667.out.dir/opcode.c.o: ../opcode.c
 CMakeFiles/20171667.out.dir/opcode.c.o: ../opcode.h
+
+CMakeFiles/20171667.out.dir/run.c.o: ../linking_loader.h
+CMakeFiles/20171667.out.dir/run.c.o: ../memory.h
+CMakeFiles/20171667.out.dir/run.c.o: ../run.c
+CMakeFiles/20171667.out.dir/run.c.o: ../run.h
 
 CMakeFiles/20171667.out.dir/symbol.c.o: ../20171667.h
 CMakeFiles/20171667.out.dir/symbol.c.o: ../symbol.c

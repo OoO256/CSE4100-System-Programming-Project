@@ -7,4 +7,4 @@ ADD_EXECUTABLE(
         opcode.c opcode.h
         symbol.c symbol.h
         vector.c vector.h
-        linking_loader.c linking_loader.h)
+        linking_loader.c linking_loader.h run.c run.h)

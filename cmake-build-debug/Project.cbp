@@ -120,6 +120,12 @@
 		<Unit filename="/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/opcode.h">
 			<Option target="20171667.out"/>
 		</Unit>
+		<Unit filename="/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/run.c">
+			<Option target="20171667.out"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/run.h">
+			<Option target="20171667.out"/>
+		</Unit>
 		<Unit filename="/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/symbol.c">
 			<Option target="20171667.out"/>
 		</Unit>
