@@ -71,6 +71,10 @@ linking_loader.h
 /mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/linking_loader.h
 vector.h
 /mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/vector.h
+memory.h
+/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/memory.h
+20171667.h
+/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/20171667.h
 
 /mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/linking_loader.h
 
@@ -100,6 +104,8 @@ symbol.h
 
 /mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/vector.c
 stdio.h
+-
+string.h
 -
 vector.h
 /mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/vector.h

@@ -4,22 +4,30 @@
 
 #include "linking_loader.h"
 #include "vector.h"
+#include "memory.h"
+#include "20171667.h"
 
-unsigned int progaddr = 0;
-unsigned int csaddr = 0;
+unsigned int progaddr = 0x4000;
 unsigned int execute_addr;
+struct vector estab;
+
 
 unsigned int hex_from_substring(char* str, int begin, int length){
     char temp[100];
     strncpy(temp, str+begin, length);
+    temp[length] = '\0';
     return strtol(temp, NULL, 16);
 }
 
-int linker(int num_files, char* file1, char* file2, char* file3){
+int linking_loader(int num_files, char* file1, char* file2, char* file3){
+    estab = vector.new();
     char* files[3] = {file1, file2, file3};
+    linker_pass1(num_files, files);
+    linker_pass2(num_files, files);
+}
 
-    struct vector estab = vector.new();
-
+int linker_pass1(int num_files, char **files){
+    unsigned int csaddr = 0;
     for (int file_idx = 0; file_idx < num_files; file_idx++){
 
         FILE* fp = fopen(files[file_idx], "r");
@@ -29,7 +37,7 @@ int linker(int num_files, char* file1, char* file2, char* file3){
 
         char record;
         char name[6+1];
-        unsigned int start_addr, length;
+        unsigned int start_addr, cs_length;
         char line[100];
         line[0] = '0';
         while (fgets(line, 100, fp) != NULL){
@@ -46,8 +54,8 @@ int linker(int num_files, char* file1, char* file2, char* file3){
                     strncpy(name, line+1, 6);
                     name[6] = '\0';
                     start_addr = hex_from_substring(line, 1+6, 6);
-                    length = hex_from_substring(line, 1+6+6, 6);
-                    estab.emplace_back(&estab, name, progaddr+csaddr, 1, length);
+                    cs_length = hex_from_substring(line, 1+6+6, 6);
+                    estab.emplace_back(&estab, name, progaddr+csaddr, 1, cs_length);
                     break;
                 case 'D':
                     len = strlen(line);
@@ -57,7 +65,7 @@ int linker(int num_files, char* file1, char* file2, char* file3){
                         strncpy(defs[i], line+1+12*i, 6);
                         defs[i][6] = '\0';
                         addr_defs[i] = hex_from_substring(line, 1+12*i+6, 6);
-                        estab.emplace_back(&estab, defs[i], progaddr+csaddr+addr_defs[i], 0, length);
+                        estab.emplace_back(&estab, defs[i], progaddr+csaddr+addr_defs[i], 0, cs_length);
                     }
                     break;
                 case 'R':
@@ -70,7 +78,7 @@ int linker(int num_files, char* file1, char* file2, char* file3){
                     if (strlen(line) >= 1+6+1){
                         execute_addr = hex_from_substring(line, 1, 6);
                     }
-                    csaddr += length;
+                    csaddr += cs_length;
                     break;
                 case '.':
                     break;
@@ -83,3 +91,117 @@ int linker(int num_files, char* file1, char* file2, char* file3){
     }
     return 0;
 }
+
+int linker_pass2(int num_files, char **files){
+    unsigned int csaddr = 0;
+    for (int file_idx = 0; file_idx < num_files; file_idx++){
+
+        struct vector local_estab = vector.new();
+
+        FILE* fp = fopen(files[file_idx], "r");
+        if (fp == NULL){
+            printf("cannot open %s!\n", files[file_idx]);
+        }
+
+        char record;
+        char name[6+1];
+        unsigned int start_addr, length, cs_length;
+        char line[100];
+        line[0] = '0';
+        while (fgets(line, 100, fp) != NULL){
+            char defs[6][7];
+            unsigned int addr_defs[6];
+            int num_defs, num_end_args, end_addr;
+            int len;
+            int reference_number, diff;
+            int to_edit, sign;
+
+
+            record = line[0];
+
+            switch (record){
+
+                case 'H':
+                    strncpy(name, line+1, 6);
+                    name[6] = '\0';
+                    start_addr = hex_from_substring(line, 1+6, 6);
+                    cs_length = hex_from_substring(line, 1+6+6, 6);
+
+                    local_estab.emplace_back(&local_estab, name,
+                                             estab.find(&estab, name)->addr, 1, 0);
+                    break;
+                case 'D':
+                    break;
+                case 'R':
+                    for (int i = 0; 1+8*i+2 < strlen(line); ++i) {
+                        strncpy(name, line+1+8*i+2, 6);
+                        name[6] = '\0';
+
+                        local_estab.emplace_back(&local_estab, name,
+                                estab.find(&estab, name)->addr, 0, 0);
+                    }
+                    
+                    break;
+                case 'T':
+                    start_addr = hex_from_substring(line, 1, 6) + csaddr + progaddr;
+                    length = hex_from_substring(line, 1+6, 2);
+                    for (int i = 0; i < length; ++i) {
+                        memory[start_addr+i] = hex_from_substring(line+1+6+2, 2*i, 2);
+                    }
+                    break;
+                case 'M':
+                    fflush(stdout);
+                    start_addr = hex_from_substring(line, 1, 6) + csaddr + progaddr;
+                    length = 6;
+
+                    reference_number = atoi(line+10);
+                    if (local_estab.get(&local_estab, reference_number) != NULL)
+                        diff = local_estab.get(&local_estab, reference_number)->addr;
+                    else
+                        printf("!!!!!!!!!!!!!!!!!!!");
+
+                    to_edit = ((int)memory[start_addr])*(1<<16)
+                            + ((int)memory[start_addr+1])*(1<<8)
+                            + memory[start_addr+2];
+                    if(line[9] == '+')
+                        to_edit += diff;
+                    else if (line[9] == '-')
+                        to_edit -= diff;
+
+                    printf("before insert\n");
+                    dump(start_addr,start_addr+8);
+                    printf("%06X\n", diff);
+
+                    memory[start_addr+2] = (unsigned char)to_edit;
+                    to_edit >>= 8;
+                    memory[start_addr+1] = (unsigned char)to_edit;
+                    to_edit >>= 8;
+                    memory[start_addr] = (unsigned char)to_edit;
+
+
+                    printf("after insert\n");
+                    dump(start_addr,start_addr+8);
+                    printf("-----------\n");
+                    break;
+                case 'E':
+                    local_estab.print(&local_estab);
+
+                    if (strlen(line) >= 1+6+1){
+                        execute_addr = hex_from_substring(line, 1, 6);
+                    }
+                    csaddr += cs_length;
+                    break;
+                case '.':
+                    break;
+                default:
+                    printf("wrong odj file!\n");
+                    return 1;
+            }
+        }
+    }
+    return 0;
+}
+
+
+
+

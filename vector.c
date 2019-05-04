@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 #include "vector.h"
 
@@ -7,7 +8,10 @@ static int emplace_back (struct vector* this, char name[7], unsigned int addr, i
     this->size++;
     this->data = realloc(this->data, this->size * sizeof(external_symbol));
 
-
+    for (int i = 0; i < 7; ++i) {
+        if(name[i] == ' ' || name[i] == '\n')
+            name[i] = '\0';
+    }
     strncpy(this->data[this->size - 1].name, name, 7);
     this->data[this->size - 1].addr = addr;
     this->data[this->size - 1].is_control_section = is_control_section;
@@ -17,10 +21,26 @@ static int emplace_back (struct vector* this, char name[7], unsigned int addr, i
 
 static external_symbol* get (struct vector* this, int idx){
 
-    if(idx >= this->size || idx < 1)
+    idx--;
+    if(idx >= this->size || idx < 0)
         return NULL;
 
-    return &(this->data[idx-1]);
+    return &(this->data[idx]);
+}
+
+static external_symbol* find (struct vector* this, char name[7]){
+
+    for (int i = 0; i < 7; ++i) {
+        if(name[i] == ' ' || name[i] == '\n')
+            name[i] = '\0';
+    }
+
+    for (int i = 0; i < this->size; ++i) {
+        if(!strcmp(this->data[i].name, name)){
+            return &(this->data[i]);
+        }
+    }
+    return NULL;
 }
 
 static void print(struct vector* this){
@@ -57,7 +77,8 @@ static struct vector new(){
             .data = malloc(0),
             .emplace_back = &emplace_back,
             .get = &get,
-            .print = &print
+            .print = &print,
+            .find = &find
     };
 }
 

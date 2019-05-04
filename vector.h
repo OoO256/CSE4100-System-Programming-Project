@@ -21,6 +21,7 @@ struct vector {
 
     int (*emplace_back)(struct vector* this, char name[7], unsigned int addr, int is_control_section, int length);
     external_symbol* (*get) (struct vector* this, int idx);
+    external_symbol* (*find) (struct vector* this, char name[7]);
     void (*print)(struct vector* this);
 };
 

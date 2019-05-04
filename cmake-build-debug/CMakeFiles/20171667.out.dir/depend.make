@@ -20,8 +20,10 @@ CMakeFiles/20171667.out.dir/history.c.o: ../20171667.h
 CMakeFiles/20171667.out.dir/history.c.o: ../history.c
 CMakeFiles/20171667.out.dir/history.c.o: ../history.h
 
+CMakeFiles/20171667.out.dir/linking_loader.c.o: ../20171667.h
 CMakeFiles/20171667.out.dir/linking_loader.c.o: ../linking_loader.c
 CMakeFiles/20171667.out.dir/linking_loader.c.o: ../linking_loader.h
+CMakeFiles/20171667.out.dir/linking_loader.c.o: ../memory.h
 CMakeFiles/20171667.out.dir/linking_loader.c.o: ../vector.h
 
 CMakeFiles/20171667.out.dir/memory.c.o: ../20171667.h

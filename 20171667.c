@@ -267,7 +267,7 @@ void parseCommand() {
 
                 int num_files = sscanf(word[0], "%[^ \n] %[^ \n] %[^ \n]", files[0], files[1], files[2]);
 
-                if(linker(num_files, files[0], files[1], files[2]) == SUCCESSFUL_RETURN)
+                if(linking_loader(num_files, files[0], files[1], files[2]) == SUCCESSFUL_RETURN)
                     addHistory(commandLine);
             }
             else {
