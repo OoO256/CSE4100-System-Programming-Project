@@ -97,12 +97,20 @@ opcode.h
 /mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/20171667.h
 
 /mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/run.c
+stdint.h
+-
 run.h
 /mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/run.h
 memory.h
 /mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/memory.h
 linking_loader.h
 /mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/linking_loader.h
+20171667.h
+/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/20171667.h
+opcode.h
+/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/opcode.h
+assembler.h
+/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/assembler.h
 
 /mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/run.h
 
