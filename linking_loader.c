@@ -9,6 +9,7 @@
 
 unsigned int progaddr = 0x4000;
 unsigned int execute_addr;
+int total_length;
 struct vector estab;
 
 
@@ -20,6 +21,7 @@ unsigned int hex_from_substring(char* str, int begin, int length){
 }
 
 int linking_loader(int num_files, char* file1, char* file2, char* file3){
+    total_length = 0;
     estab = vector.new();
     char* files[3] = {file1, file2, file3};
     linker_pass1(num_files, files);
@@ -89,6 +91,7 @@ int linker_pass1(int num_files, char **files){
         }
         estab.print(&estab);
     }
+    total_length = csaddr;
     return 0;
 }
 

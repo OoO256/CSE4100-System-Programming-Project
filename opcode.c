@@ -144,6 +144,31 @@ node_instruction* getInst(char* mnemonic) {
     }
 }
 
+int get_format_from_opcode(int opcode) {
+    switch (opcode) {
+        case 0xC4:
+        case 0xC0:
+        case 0xF4:
+        case 0xC8:
+        case 0xF0:
+        case 0xF8:
+            return 1;
+        case 0x90:
+        case 0xB4:
+        case 0xA0:
+        case 0x9C:
+        case 0x98:
+        case 0xAC:
+        case 0xA4:
+        case 0x94:
+        case 0xB0:
+        case 0xB8:
+            return 2;
+        default:
+            return 3;
+    }
+}
+
 
 int opcode(char* mnemonic){
     // print opcode of mnemonic

@@ -27,3 +27,5 @@ node_instruction* getInst(char* mnemonic);
 int opcode(char* mnemonic);
 
 char* removeSpaces(char* str);
+
+int get_format_from_opcode(int opcode);
