@@ -6,6 +6,9 @@
 #include "opcode.h"
 #include "assembler.h"
 
+#define r1 *addr_to_reg(reg_byte >> 2)
+#define r2 *addr_to_reg(reg_byte | 0b0011)
+
 struct Float{
     u_int64_t frac : 36;
     u_int64_t exp : 11;
@@ -48,12 +51,14 @@ int32_t* addr_to_reg(int addr){
     }
 }
 
-u_int32_t* r1(uint8_t byte){
-    return addr_to_reg(byte >> 2);
+uint8_t reg_byte;
+
+u_int32_t* r1(){
+    return addr_to_reg(reg_byte >> 2);
 }
 
-u_int32_t* r2(uint8_t byte){
-    return addr_to_reg(byte | 0b0011);
+u_int32_t* r2(){
+    return addr_to_reg(reg_byte | 0b0011);
 }
 
 int flag_on(uint8_t byte, uint8_t pos){
@@ -78,6 +83,7 @@ int run(){
         else{
             format = get_format_from_opcode(byte[0] | 0b11111100);
         }
+        int n;
 
         switch (format){
             case 1:
@@ -105,43 +111,47 @@ int run(){
                 switch (byte[0] | 0b11111100){
                     case 0x90:
                         //ADDR r1,r2      2       90    r2 <-- (r2) + (r1)
-                        *r2(byte[1]) = *r2(byte[1]) + *r1(byte[1]);
+                        r2 = r2 + r1;
                         break;
                     case 0xB4:
                         // CLEAR r1        2       B4    r1 <-- 0
-                        *r2(byte[1]) = 0;
+                        r2 = 0;
                         break;
                     case 0xA0:
                         // COMPR r1,r2     2       A0    (r1) : (r2)
-                        SW = *r1(byte[1]) - *r2(byte[1]);
+                        SW = r1 - r2;
                         break;
                     case 0x9C:
                         // DIVR r1,r2      2       9C    (r2) <-- (r2) / (r1)
-                        *r2(byte[1]) = *r2(byte[1]) / *r1(byte[1]);
+                        r2 = r2 / r1;
                         break;
                     case 0x98:
                         // MULR r1,r2      2       98    r2 <-- (r2) * (r1)
-                        *r2(byte[1]) = *r2(byte[1]) * *r1(byte[1]);
+                        r2 = r2 * r1;
                         break;
                     case 0xAC:
                         // RMO r1,r2       2       AC    r2 <-- (r1)
-                        *r2(byte[1]) = *r1(byte[1]);
+                        r2 = r1;
                         break;
                     case 0xA4:
                         // SHIFTL r1,n     2       A4    r1 <-- (r1); left circular            X
                         //                                shift n bits. {In assembled
                         // instruction, r2=n-1}
+                        n = *r2(byte[1])
+
                         break;
                     case 0x94:
                         // SUBR r1,r2      2       94    r2 <-- (r2) - (r1)
+                        r2 = r2 - r1;
                         break;
                     case 0xB0:
                         // SVC n           2       B0    Generate SVC interrupt. {In           X
                         //                                assembled instruction, r1=n}
                         break;
                     case 0xB8:
+                        // X <-- (X) + 1; (X) : (r1)
                         X++;
-                        SW = X - *r1(byte[1]);
+                        SW = X - r1;
                         break;
                     default:
                         break;
