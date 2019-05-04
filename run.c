@@ -53,16 +53,8 @@ int32_t* addr_to_reg(int addr){
 
 uint8_t reg_byte;
 
-u_int32_t* r1(){
-    return addr_to_reg(reg_byte >> 2);
-}
-
-u_int32_t* r2(){
-    return addr_to_reg(reg_byte | 0b0011);
-}
-
 int flag_on(uint8_t byte, uint8_t pos){
-    return (byte | pos) != 0;
+    return (byte & pos) != 0;
 }
 
 
@@ -84,6 +76,7 @@ int run(){
             format = get_format_from_opcode(byte[0] | 0b11111100);
         }
         int n;
+        int bit;
 
         switch (format){
             case 1:
@@ -137,7 +130,12 @@ int run(){
                         // SHIFTL r1,n     2       A4    r1 <-- (r1); left circular            X
                         //                                shift n bits. {In assembled
                         // instruction, r2=n-1}
-                        n = *r2(byte[1])
+                        bit = ((1 << 23) & r1) != 0;
+
+                        n = r2 + 1;
+                        r1 <<= n;
+                        r1 |= bit;
+
 
                         break;
                     case 0x94:
@@ -147,6 +145,8 @@ int run(){
                     case 0xB0:
                         // SVC n           2       B0    Generate SVC interrupt. {In           X
                         //                                assembled instruction, r1=n}
+
+
                         break;
                     case 0xB8:
                         // X <-- (X) + 1; (X) : (r1)
