@@ -8,7 +8,7 @@ static int emplace_back (struct vector* this, char name[7], unsigned int addr, i
     this->data = realloc(this->data, this->size * sizeof(external_symbol));
 
 
-    strncpy(this->data[this->size - 1].name, name, 6);
+    strncpy(this->data[this->size - 1].name, name, 7);
     this->data[this->size - 1].addr = addr;
     this->data[this->size - 1].is_control_section = is_control_section;
     this->data[this->size - 1].length = length;

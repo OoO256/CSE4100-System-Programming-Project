@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Project"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="20171667.out">
+				<Option output="/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/cmake-build-debug/20171667.out" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 20171667.out"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="20171667.out/fast">
+				<Option output="/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/cmake-build-debug/20171667.out" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 20171667.out/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/20171667.c">
+			<Option target="20171667.out"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/20171667.h">
+			<Option target="20171667.out"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/assembler.c">
+			<Option target="20171667.out"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/assembler.h">
+			<Option target="20171667.out"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/history.c">
+			<Option target="20171667.out"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/history.h">
+			<Option target="20171667.out"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/linking_loader.c">
+			<Option target="20171667.out"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/linking_loader.h">
+			<Option target="20171667.out"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/memory.c">
+			<Option target="20171667.out"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/memory.h">
+			<Option target="20171667.out"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/opcode.c">
+			<Option target="20171667.out"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/opcode.h">
+			<Option target="20171667.out"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/symbol.c">
+			<Option target="20171667.out"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/symbol.h">
+			<Option target="20171667.out"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/vector.c">
+			<Option target="20171667.out"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/vector.h">
+			<Option target="20171667.out"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/ACM_ICPC/Desktop/SP/CSE4100-System-Programming-Project-1/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

@@ -36,6 +36,7 @@ int linker(int num_files, char* file1, char* file2, char* file3){
             char defs[6][7];
             unsigned int addr_defs[6];
             int num_defs, num_end_args, end_addr;
+            int len;
 
             record = line[0];
 
@@ -43,15 +44,18 @@ int linker(int num_files, char* file1, char* file2, char* file3){
 
                 case 'H':
                     strncpy(name, line+1, 6);
+                    name[6] = '\0';
                     start_addr = hex_from_substring(line, 1+6, 6);
                     length = hex_from_substring(line, 1+6+6, 6);
                     estab.emplace_back(&estab, name, progaddr+csaddr, 1, length);
                     break;
                 case 'D':
+                    len = strlen(line);
                     num_defs = (strlen(line)-1-1+11)/12;
 
                     for (int i = 0; i < num_defs; ++i) {
                         strncpy(defs[i], line+1+12*i, 6);
+                        defs[i][6] = '\0';
                         addr_defs[i] = hex_from_substring(line, 1+12*i+6, 6);
                         estab.emplace_back(&estab, defs[i], progaddr+csaddr+addr_defs[i], 0, length);
                     }

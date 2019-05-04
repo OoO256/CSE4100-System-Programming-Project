@@ -19,7 +19,7 @@ struct vector {
     int size;
     external_symbol* data;
 
-    int (*emplace_back)(struct vector* this, char name[6], unsigned int addr, int is_control_section, int length);
+    int (*emplace_back)(struct vector* this, char name[7], unsigned int addr, int is_control_section, int length);
     external_symbol* (*get) (struct vector* this, int idx);
     void (*print)(struct vector* this);
 };
