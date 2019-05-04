@@ -4,6 +4,9 @@
 #include "memory.h"
 #include "assembler.h"
 #include "symbol.h"
+#include "linking_loader.h"
+
+#define COMMAND_IS(x) (!strcmp(command, (x)))
 
 // for debug
 // if we define DEBUG, we can see debug message
@@ -193,27 +196,27 @@ void parseCommand() {
 
     switch (num_arg) {
         case 1:
-            if (!strcmp(command, "h") || !strcmp(command, "help")) {
+            if (COMMAND_IS("h") || COMMAND_IS("help")) {
                 addHistory(commandLine);
                 help();
-            } else if (!strcmp(command, "d") || !strcmp(command, "dir")) {
+            } else if (COMMAND_IS("d") || COMMAND_IS("dir")) {
                 addHistory(commandLine);
                 dir();
 
-            } else if (!strcmp(command, "q") || !strcmp(command, "quit")) {
+            } else if (COMMAND_IS("q") || COMMAND_IS("quit")) {
                 addHistory(commandLine);
                 quit();
 
-            } else if (!strcmp(command, "hi") || !strcmp(command, "history")) {
+            } else if (COMMAND_IS("hi") || COMMAND_IS("history")) {
                 addHistory(commandLine);
                 history();
-            } else if (!strcmp(command, "opcodelist")) {
+            } else if (COMMAND_IS("opcodelist")) {
                 opcodelist();
                 addHistory(commandLine);
-            } else if (!strcmp(command, "reset")) {
+            } else if (COMMAND_IS("reset")) {
                 reset();
                 addHistory(commandLine);
-            } else if (!strcmp(command, "du") || !strcmp(command, "dump")) {
+            } else if (COMMAND_IS("du") || COMMAND_IS("dump")) {
                 DEBUG_PRINT(("call dump\n"));
 
                 // call dump [last_dump+1, last_dump+160]
@@ -222,7 +225,7 @@ void parseCommand() {
                 if (dump(last_dump + 1, min(0xFFFFF, last_dump + 1 + 159)) == SUCCESSFUL_RETURN)
                     addHistory(commandLine);
             }
-            else if (!strcmp(command, "symbol")){
+            else if (COMMAND_IS("symbol")){
                 printSymbol();
                 addHistory(commandLine);
             }
@@ -232,7 +235,7 @@ void parseCommand() {
             break;
         case 2:
             if (
-                    (!strcmp(command, "du") || !strcmp(command, "dump"))
+                    (COMMAND_IS("du") || COMMAND_IS("dump"))
                     && isHexString(word[0])
                     ) {
                 // dump start
@@ -241,23 +244,38 @@ void parseCommand() {
 
                 if (dump(start, min(0xFFFFF, start + 159)) == SUCCESSFUL_RETURN)
                     addHistory(commandLine);
-            } else if (!strcmp(command, "opcode") && isOneWord(word[0])) {
+            } else if (COMMAND_IS("opcode") && isOneWord(word[0])) {
                 //opcode mnemonic
                 opcode(word[0]);
                 addHistory(commandLine);
-            } else if (!strcmp(command, "type")) {
+            } else if (COMMAND_IS("type")) {
                 if (type(word[0]) == SUCCESSFUL_RETURN)
                     addHistory(commandLine);
-            } else if (!strcmp(command, "assemble")) {
+            } else if (COMMAND_IS("assemble")) {
                 if (assemble(word[0]) == SUCCESSFUL_RETURN) {
                     addHistory(commandLine);
                 }
-            } else {
+            }
+            else if (COMMAND_IS("progaddr") && isHexString(word[0])){
+                progaddr = (unsigned int) strtol(word[0], NULL, 16);
+                addHistory(commandLine);
+            }
+            else if (COMMAND_IS("loader")){
+
+                char files[3][100];
+                files[0][0] = files[1][0] = files[2][0] = '\0';
+
+                int num_files = sscanf(word[0], "%[^ \n] %[^ \n] %[^ \n]", files[0], files[1], files[2]);
+
+                if(linker(num_files, files[0], files[1], files[2]) == SUCCESSFUL_RETURN)
+                    addHistory(commandLine);
+            }
+            else {
                 printf("Syntax error!\n");
             }
             break;
         case 4:
-            if ((!strcmp(command, "du") || !strcmp(command, "dump"))
+            if ((COMMAND_IS("du") || COMMAND_IS("dump"))
                 && isHexString(word[0])
                 && isHexString(word[1])) {
 
@@ -269,7 +287,7 @@ void parseCommand() {
                 DEBUG_PRINT(("call dump %02X %02X\n", start, end));
                 if (dump(start, end) == SUCCESSFUL_RETURN)
                     addHistory(commandLine);
-            } else if ((!strcmp(command, "e") || !strcmp(command, "edit"))
+            } else if ((COMMAND_IS("e") || COMMAND_IS("edit"))
                        && isHexString(word[0])
                        && !strcmp(sep[0], ",")
                        && isHexString(word[1])
@@ -290,7 +308,7 @@ void parseCommand() {
             break;
         case 6:
             if (
-                    (!strcmp(command, "f") || !strcmp(command, "fill"))
+                    (COMMAND_IS("f") || COMMAND_IS("fill"))
                 && isHexString(word[0])
                 && !strcmp(sep[0], ",")
                 && isHexString(word[1])
