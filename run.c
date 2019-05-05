@@ -10,6 +10,7 @@
 #define r2 *addr_to_reg(extract_uint8(inst.b1, 4, 8))
 #define WORD0 (word){.all = 0}
 #define INPUT_DATA 1
+//#define DEBUG
 
 const int POS_N = 6;
 const int POS_I = 7;
@@ -39,7 +40,7 @@ struct Float{
 static uint8_t set_uint8(uint8_t src, int start, int end){
 
     for(int i = start; i < end; i++){
-        src |= (1 << i);
+        src |= (0b10000000 >> i);
     }
     return src;
 }
@@ -64,7 +65,7 @@ static word set_word(word src, int start, int end){
 }
 
 static int check_uint8(uint8_t src, int pos){
-    return (src & (1 << pos)) != 0;
+    return (src & (0b10000000 >> pos)) != 0;
 }
 
 static int check_word(word src, int pos){
@@ -123,34 +124,73 @@ int32_t* addr_to_reg(int addr){
     }
 }
 
-static u_int32_t deref(u_int32_t src){
-    src &= set_word(WORD0, 0, 8).all;
+static void print_reg(){
+    printf("A : %06X  ", A);
+    printf("X : %06X  \n", X);
+    printf("L : %06X  ", L);
+    printf("PC: %06X  \n", PC);
+    printf("B : %06X  ", B);
+    printf("S : %06X  \n", S);
+    printf("T : %06X  \n", T);
+}
 
-    return (u_int32_t)memory[src] * (1 << 16)
-        + (u_int32_t)memory[src+1] * (1 << 8)
-        + (u_int32_t)memory[src+2];
+static uint32_t deref(uint32_t src){
+    word w = {.all = src};
+    w.b0 = 0;
+
+    return (uint32_t)memory[w.all] * (1 << 16)
+        + (uint32_t)memory[w.all+1] * (1 << 8)
+        + (uint32_t)memory[w.all+2];
 }
 
 static void store(uint32_t TA, uint32_t val){
     word w = {.all = val};
     memory[TA] = w.b1;
-    memory[TA] = w.b2;
-    memory[TA] = w.b3;
+    memory[TA+1] = w.b2;
+    memory[TA+2] = w.b3;
 }
 
 
 int run(){
+    int is_input_test_device_ready = 1;
+
+    uint8_t device_input[] = {'I', 'N', '\0', '\0', '\0', '\0', '\0', '\0', '\0'};
+    int cnt_device_input = 0;
+
     PC = progaddr + execute_addr;
+    L = progaddr + total_length;
 
     while (progaddr <= PC && PC < progaddr + total_length){
         int format;
 
         word inst = {.b0 = memory[PC], .b1 = memory[PC+1], .b2 = memory[PC+2], .b3 = memory[PC+3]};
-        word disp12 = {.all = inst.all & set_word((word){.all = 0}, 12, 24).all};
-        word disp20 = {.all = inst.all & set_word((word){.all = 0}, 12, 32).all};
+        word disp12 = {.all = extract_word(inst, 12, 24).all};
+        word disp20 = {.all = extract_word(inst, 12, 32).all};
         uint8_t opcode = extract_uint8(inst.b0, 0, 6) << 2;
-
         format = get_format_from_opcode(opcode);
+
+        PC += format;
+        if(format == 3 && check_uint8(inst.b1, POS_E)){
+            PC += 1;
+        }
+
+#ifdef DEBUG
+        printf("-----------------------------\n");
+        printf("pc : %04X\n", PC);
+        printf("inst : %X\n", inst.all);
+        printf("disp12 : %03X\n", disp12.all);
+        printf("disp20 : %05X\n", disp20.all);
+        printf("n : %d\ti : %d\tx : %d\tb : %d\tp : %d\te : %d\t\n"
+                , check_uint8(inst.b0, POS_N)
+                , check_uint8(inst.b0, POS_I)
+                , check_uint8(inst.b1, POS_X)
+                , check_uint8(inst.b1, POS_B)
+                , check_uint8(inst.b1, POS_P)
+                , check_uint8(inst.b1, POS_E)
+        );
+        fflush(stdout);
+#endif
+
 
 
         int n;
@@ -159,6 +199,11 @@ int run(){
         uint32_t TV;
 
         switch (format) {
+#ifdef DEBUG
+            dump(0, 0x100);
+            dump(0x1000, 0x1100);
+#endif
+
             case 1:
                 switch (opcode) {
                     case 0xC4:
@@ -188,7 +233,7 @@ int run(){
                         break;
                     case 0xB4:
                         // CLEAR r1        2       B4    r1 <-- 0
-                        r2 = 0;
+                        r1 = 0;
                         break;
                     case 0xA0:
                         // COMPR r1,r2     2       A0    (r1) : (r2)
@@ -242,12 +287,33 @@ int run(){
                     TA = extract_word(inst, 8 + 1, 24).all;
                 } else if (check_uint8(inst.b1, POS_B) && !check_uint8(inst.b1, POS_P)) {
                     // base relative
-                    TA = deref(B) + disp12.all;
+                    TA = B + disp12.all;
                 } else if (!check_uint8(inst.b1, POS_B) && check_uint8(inst.b1, POS_P)) {
                     // pc relative
-                    TA = deref(PC) + disp12.all;
-                    TA &= set_word(WORD0, 20, 32).all;
-                } else {
+                    if(check_word(disp12, 20)){
+                        disp12.all -= 1;
+                        disp12.all ^= set_word(WORD0, 20, 32).all;
+                        TA = PC - disp12.all;
+                    }
+                    else{
+                        TA = PC + disp12.all;
+                    }
+                } else if (opcode == 0x4C) {
+                    // RSUB
+                    // pass!
+                }
+                else if (!check_uint8(inst.b0, POS_N)
+                    && check_uint8(inst.b0, POS_I)
+                       && !check_uint8(inst.b1, POS_X)
+                          && !check_uint8(inst.b1, POS_B)
+                             && !check_uint8(inst.b1, POS_P)
+                                && !check_uint8(inst.b1, POS_E)
+                    ){
+                    // imm constant
+                    // pass!
+                    TA = extract_word(inst, 12, 24).all;
+                }
+                else {
                     printf("not supported addressing!\n");
                 }
 
@@ -255,7 +321,10 @@ int run(){
                     TA += X;
                 }
 
+#ifdef DEBUG
                 printf("target addr is %x\n", TA);
+                fflush(stdout);
+#endif
 
                 switch (extract_uint8(inst.b0, 6, 8)) {
                     case 0b00000001:
@@ -274,12 +343,15 @@ int run(){
                         break;
                 }
 
+#ifdef DEBUG
                 printf("Target value is %x\n", TV);
+                fflush(stdout);
+#endif
 
-                switch (extract_uint8(inst.b0, 0, 6)) {
+                switch (extract_uint8(inst.b0, 0, 6) << 2) {
                     case 0x18:
                         // ADD m          3/4      18    A <-- (A) + (m..m+2)
-                        A = deref(A) + TV;
+                        A = A + TV;
                         break;
                     case 0x58:
                         // ADDF m         3/4      58    F <-- (F) + (m..m+5)
@@ -287,7 +359,7 @@ int run(){
                         break;
                     case 0x40:
                         // AND m          3/4      40    A <-- (A) & (m..m+2
-                        A = deref(A) & TV;
+                        A = A & TV;
                         break;
                     case 0x28:
                         // COMP m         3/4      28    A : (m..m+2)
@@ -299,7 +371,7 @@ int run(){
                         break;
                     case 0x24:
                         //DIV m          3/4      24    A : (A) / (m..m+2)
-                        A = deref(A) / TV;
+                        A = A / TV;
                         break;
                     case 0x64:
                         // DIVF m         3/4      64    F : (F) / (m..m+5)
@@ -329,7 +401,7 @@ int run(){
                         break;
                     case 0x48:
                         //JSUB m         3/4      48    L <-- (PC); PC <-- m
-                        L = deref(PC);
+                        L = PC;
                         PC = TA;
                         break;
                     case 0x00:
@@ -342,9 +414,7 @@ int run(){
                         break;
                     case 0x50:
                         //LDCH m         3/4      50    A [rightmost byte] <-- (m)
-                        TV &= set_word(WORD0, 24, 32).all;
-                        A &= set_word(WORD0, 0, 24).all;
-                        A |= TV;
+                        ((word*)(&A))->b3 = ((word*)(&TV))->b1;
                         break;
                     case 0x70:
                         //LDF m          3/4      70    F <-- (m..m+5)                        X F
@@ -375,8 +445,8 @@ int run(){
                         break;
                     case 0x20:
                         //MUL m          3/4      20    A <-- (A) * (m..m+2)
-                        A = deref(A) * TV;
-                        A &= 0b00000000111111111111111111111111;
+                        A = A * TV;
+                        ((word*)A)->b0 = 0;
                         break;
                     case 0x60:
                         //MULF m         3/4      60    F <-- (F) * (m..m+5)                  X F
@@ -384,17 +454,17 @@ int run(){
                         break;
                     case 0x44:
                         //OR m           3/4      44    A <-- (A) | (m..m+2)
-                        A = deref(A) | TV;
+                        A = A | TV;
                         break;
                     case 0xD8:
                         //RD m           3/4      D8    A [rightmost byte] <-- data         P
                         //                                from device specified by (m)
                         A &= set_word(WORD0, 0, 24).all;
-                        A |= INPUT_DATA;
+                        A |= device_input[cnt_device_input++];
                         break;
                     case 0x4C:
                         //RSUB           3/4      4C    PC <-- (L)
-                        PC = deref(L);
+                        PC = L;
                         break;
                     case 0xEC:
                         //SSK m          3/4      EC    Protection key for address m        P X
@@ -412,7 +482,7 @@ int run(){
                     case 0x54:
                         //STCH m         3/4      54    m <-- (A) [rightmost byte]
                         memory[TA]
-                                = (uint8_t) (deref(A));
+                                = (uint8_t)A;
                         break;
                     case 0x80:
                         //STF m          3/4      80    m..m+5 <-- (F)                        X
@@ -426,27 +496,27 @@ int run(){
                         break;
                     case 0x14:
                         //STL m          3/4      14    m..m+2 <-- (L)
-                        store(TA, deref(L));
+                        store(TA, L);
                         break;
                     case 0x7C:
                         //STS m          3/4      7C    m..m+2 <-- (S)                        X
-                        store(TA, deref(S));
+                        store(TA, S);
                         break;
                     case 0xE8:
                         //STSW m         3/4      E8    m..m+2 <-- (SW)                     P
-                        store(TA, deref(SW));
+                        store(TA, SW);
                         break;
                     case 0x84:
                         //STT m          3/4      84    m..m+2 <-- (T)                        X
-                        store(TA, deref(T));
+                        store(TA, T);
                         break;
                     case 0x10:
                         //STX m          3/4      10    m..m+2 <-- (X)
-                        store(TA, deref(X));
+                        store(TA, X);
                         break;
                     case 0x1C:
                         //SUB m          3/4      1C    A <-- (A) - (m..m+2)
-                        A = deref(A) - TV;
+                        A = A - TV;
                         break;
                     case 0x5C:
                         //SUBF m         3/4      5C    F <-- (F) - (m..m+5)                  X F
@@ -455,24 +525,32 @@ int run(){
                     case 0xE0:
                         //TD m           3/4      E0    Test device specified by (m)
                         // IO
+                        if(is_input_test_device_ready){
+                            SW = 0 - 1;
+                        }
+                        else{
+                            SW = 0;
+                        }
                         break;
                     case 0x2C:
                         //TIX m          3/4      2C    X <-- (X) + 1; (X) : (m..m+2)             C
-                        X = deref(X) + 1;
-                        SW = deref(X) - TV;
+                        X = X + 1;
+                        SW = X - TV;
                         break;
                     case 0xDC:
-                        //WD m           3/4      DC    Device specified by (m) <-- (A)     P
+                        //WD m           3/4      DC    Device specified by (m) <-- (A)[RMB]     P
                         // IO
+                        printf("device write : %02X\n", (uint8_t)A);
                         break;
                     default:
                         printf("not supported opcode!\n");
                         break;
 
                 }
+                break;
             default:
                 break;
         }
-        PC += format;
     }
+    print_reg();
 }

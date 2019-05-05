@@ -89,8 +89,8 @@ int linker_pass1(int num_files, char **files){
                     return 1;
             }
         }
-        estab.print(&estab);
     }
+    estab.print(&estab);
     total_length = csaddr;
     return 0;
 }
@@ -171,9 +171,6 @@ int linker_pass2(int num_files, char **files){
                     else if (line[9] == '-')
                         to_edit -= diff;
 
-                    printf("before insert\n");
-                    dump(start_addr,start_addr+8);
-                    printf("%06X\n", diff);
 
                     memory[start_addr+2] = (unsigned char)to_edit;
                     to_edit >>= 8;
@@ -181,13 +178,9 @@ int linker_pass2(int num_files, char **files){
                     to_edit >>= 8;
                     memory[start_addr] = (unsigned char)to_edit;
 
-
-                    printf("after insert\n");
-                    dump(start_addr,start_addr+8);
-                    printf("-----------\n");
                     break;
                 case 'E':
-                    local_estab.print(&local_estab);
+                    //local_estab.print(&local_estab);
 
                     if (strlen(line) >= 1+6+1){
                         execute_addr = hex_from_substring(line, 1, 6);
