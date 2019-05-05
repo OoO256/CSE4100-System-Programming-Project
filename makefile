@@ -1,4 +1,4 @@
-20171667.out : 20171667.o opcode.o assembler.o history.o memory.o symbol.o
+20171667.out : 20171667.o opcode.o assembler.o history.o memory.o symbol.o vector.o linking_loader.o run.o
 	gcc -std=gnu99 -Wall 20171667.o opcode.o assembler.o history.o memory.o symbol.o -o 20171667.out
 	
 20171667.o : 20171667.c
@@ -18,6 +18,15 @@ memory.o : memory.c
 	
 symbol.o : symbol.c
 	gcc -c -std=gnu99 -Wall symbol.c
+	
+vector.o : vector.c
+	gcc -c -std=gnu99 -Wall vector.c
+	
+linking_loader.o : linking_loader.c
+	gcc -c -std=gnu99 -Wall linking_loader.c
+	
+run.o : run.c
+	gcc -c -std=gnu99 -Wall run.c
 
 clean :
 	rm *.o 20171667.out
