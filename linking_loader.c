@@ -7,7 +7,7 @@
 #include "memory.h"
 #include "20171667.h"
 
-unsigned int progaddr = 0x4000;
+unsigned int progaddr = 0;
 unsigned int execute_addr;
 int total_length;
 struct vector estab;
