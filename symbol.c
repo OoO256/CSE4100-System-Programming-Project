@@ -98,6 +98,11 @@ void printSymbol(){
 void freeSymbols(){
     //free symbols to avoid memory leak
 
+    if(symbolTable == NULL || symbol_list == NULL)
+        return;
+
+
+
     for (int i = 0; i < LENGTH_SYMBOLTABLE; i++)
     {
         DEBUG_PRINT(("i is %d\n", i));
