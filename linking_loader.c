@@ -47,7 +47,7 @@ int linker_pass1(int num_files, char **files){
         // record letter of current line
         char name[6+1];
         // section name
-        unsigned int start_addr, cs_length;
+        unsigned int cs_length;
         // start address, control section length
         char line[100];
         // one line
@@ -55,8 +55,7 @@ int linker_pass1(int num_files, char **files){
         while (fgets(line, 100, fp) != NULL){
             char defs[6][7];
             unsigned int addr_defs[6];
-            int num_defs, num_end_args, end_addr;
-            int len;
+            int num_defs;
 
             record = line[0];
 
@@ -66,13 +65,11 @@ int linker_pass1(int num_files, char **files){
                     // in H record, set name of program, cs_length, insert name to estab
                     strncpy(name, line+1, 6);
                     name[6] = '\0';
-                    start_addr = hex_from_substring(line, 1+6, 6);
                     cs_length = hex_from_substring(line, 1+6+6, 6);
                     estab.emplace_back(&estab, name, progaddr+csaddr, 1, cs_length);
                     break;
                 case 'D':
                     // in D record, insert symbol to estab
-                    len = strlen(line);
                     num_defs = (strlen(line)-1-1+11)/12;
 
                     for (int i = 0; i < num_defs; ++i) {
@@ -129,12 +126,8 @@ int linker_pass2(int num_files, char **files){
         char line[100];
         line[0] = '0';
         while (fgets(line, 100, fp) != NULL){
-            char defs[6][7];
-            unsigned int addr_defs[6];
-            int num_defs, num_end_args, end_addr;
-            int len;
             int reference_number, diff;
-            int to_edit, sign;
+            int to_edit;
 
 
             record = line[0];
@@ -145,7 +138,6 @@ int linker_pass2(int num_files, char **files){
                     // in H record, set name of program, cs_length, insert name to local estab
                     strncpy(name, line+1, 6);
                     name[6] = '\0';
-                    start_addr = hex_from_substring(line, 1+6, 6);
                     cs_length = hex_from_substring(line, 1+6+6, 6);
 
                     local_estab.emplace_back(&local_estab, name,
@@ -176,7 +168,6 @@ int linker_pass2(int num_files, char **files){
                     // modify symbol form local estab
                     fflush(stdout);
                     start_addr = hex_from_substring(line, 1, 6) + csaddr + progaddr;
-                    length = 6;
 
                     reference_number = atoi(line+10);
                     if (local_estab.get(&local_estab, reference_number) != NULL)

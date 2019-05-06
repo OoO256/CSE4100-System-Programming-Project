@@ -186,7 +186,6 @@ int run(){
         word inst = {.b0 = memory[PC], .b1 = memory[PC+1], .b2 = memory[PC+2], .b3 = memory[PC+3]};
         // fetch (m .. m3) to parse
         word disp12 = {.all = extract_word(inst, 12, 24).all};
-        word disp20 = {.all = extract_word(inst, 12, 32).all};
         uint8_t opcode = extract_uint8(inst.b0, 0, 6) << 2;
         format = get_format_from_opcode(opcode);
         // get format info from opcode.c
@@ -201,7 +200,6 @@ int run(){
         printf("pc : %04X\n", PC);
         printf("inst : %X\n", inst.all);
         printf("disp12 : %03X\n", disp12.all);
-        printf("disp20 : %05X\n", disp20.all);
         printf("n : %d\ti : %d\tx : %d\tb : %d\tp : %d\te : %d\t\n"
                 , check_uint8(inst.b0, POS_N)
                 , check_uint8(inst.b0, POS_I)
@@ -466,7 +464,7 @@ int run(){
                     case 0x20:
                         //MUL m          3/4      20    A <-- (A) * (m..m+2)
                         A = A * TV;
-                        ((word*)A)->b0 = 0;
+                        A = extract_word((word){.all = A}, 8, 32).all;
                         break;
                     case 0x60:
                         //MULF m         3/4      60    F <-- (F) * (m..m+5)                  X F

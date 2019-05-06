@@ -12,15 +12,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd80f1f1-e2af-48fa-96f5-0eaffdaf72b1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/breakpoints.h" beforeDir="false" afterPath="$PROJECT_DIR$/breakpoints.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/20171667.out" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/20171667.out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/20171667.out.dir/linking_loader.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/20171667.out.dir/linking_loader.c.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/20171667.out.dir/opcode.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/20171667.out.dir/opcode.c.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/20171667.out.dir/run.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/20171667.out.dir/run.c.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/20171667.out.dir/vector.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/20171667.out.dir/vector.c.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/linking_loader.c" beforeDir="false" afterPath="$PROJECT_DIR$/linking_loader.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linking_loader.h" beforeDir="false" afterPath="$PROJECT_DIR$/linking_loader.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run.c" beforeDir="false" afterPath="$PROJECT_DIR$/run.c" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -33,13 +25,14 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/run.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="311" column="22" lean-forward="true" selection-end-line="597" selection-end-column="1" />
+            <state relative-caret-position="130">
+              <caret line="187" column="62" selection-start-line="187" selection-start-column="62" selection-end-line="187" selection-end-column="62" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
+                <element signature="e#4032#4623#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -84,11 +77,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="9" column="41" lean-forward="true" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="41" />
+            <state relative-caret-position="198">
+              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
             </state>
           </provider>
         </entry>
@@ -108,8 +101,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/linking_loader.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="13" column="17" lean-forward="true" selection-end-line="224" />
+            <state relative-caret-position="1938">
+              <caret line="127" column="45" lean-forward="true" selection-start-line="127" selection-start-column="45" selection-end-line="127" selection-end-column="45" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -167,10 +160,10 @@
         <option value="$PROJECT_DIR$/opcode.c" />
         <option value="$PROJECT_DIR$/vector.h" />
         <option value="$PROJECT_DIR$/vector.c" />
-        <option value="$PROJECT_DIR$/linking_loader.c" />
-        <option value="$PROJECT_DIR$/run.c" />
         <option value="$PROJECT_DIR$/linking_loader.h" />
         <option value="$PROJECT_DIR$/breakpoints.h" />
+        <option value="$PROJECT_DIR$/linking_loader.c" />
+        <option value="$PROJECT_DIR$/run.c" />
       </list>
     </option>
   </component>
@@ -243,12 +236,12 @@
       <workItem from="1556967744868" duration="21912000" />
       <workItem from="1557051687723" duration="34059000" />
       <workItem from="1557124213247" duration="8502000" />
-      <workItem from="1557136590943" duration="7722000" />
+      <workItem from="1557136590943" duration="8355000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="78418000" />
+    <option name="totallyTimeSpent" value="79051000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -266,10 +259,10 @@
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23782559" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="0" weight="0.2854145" />
+      <window_info anchor="bottom" id="Messages" order="0" visible="true" weight="0.2854145" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" weight="0.23609653" />
-      <window_info anchor="bottom" id="Run" order="3" visible="true" weight="0.27806926" />
+      <window_info anchor="bottom" id="Run" order="3" weight="0.27806926" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.2016632" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
@@ -317,7 +310,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/linking_loader.c</url>
-          <line>189</line>
+          <line>180</line>
           <option name="timeStamp" value="26" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
@@ -327,12 +320,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/run.c</url>
-          <line>333</line>
+          <line>331</line>
           <option name="timeStamp" value="71" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/run.c</url>
-          <line>582</line>
+          <line>580</line>
           <option name="timeStamp" value="72" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
@@ -624,23 +617,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/breakpoints.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="11" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/breakpoints.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="21" column="1" lean-forward="true" selection-end-line="35" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/linking_loader.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
@@ -648,30 +624,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/linking_loader.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="13" column="17" lean-forward="true" selection-end-line="224" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/run.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
           <caret line="6" lean-forward="true" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="311" column="22" lean-forward="true" selection-end-line="597" selection-end-column="1" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -694,8 +650,46 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="41" lean-forward="true" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="41" />
+        <state relative-caret-position="198">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/breakpoints.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="21" column="1" lean-forward="true" selection-end-line="35" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/breakpoints.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="11" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/linking_loader.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1938">
+          <caret line="127" column="45" lean-forward="true" selection-start-line="127" selection-start-column="45" selection-end-line="127" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="187" column="62" selection-start-line="187" selection-start-column="62" selection-end-line="187" selection-end-column="62" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+            <element signature="e#4032#4623#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
