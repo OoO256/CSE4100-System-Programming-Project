@@ -29,7 +29,7 @@ run.o : run.c
 	gcc -c -std=gnu99 -Wall run.c
 
 breakpoints.o : breakpoints.c
-    gcc -c -std=gnu99 -Wall breakpoints.c
+	gcc -c -std=gnu99 -Wall breakpoints.c
 
 clean :
 	rm *.o 20171667.out
