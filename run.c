@@ -87,6 +87,7 @@ static int check_word(word src, int pos){
     else if (pos < 32){
         return check_uint8(src.b3, pos - 24);
     }
+    return 0;
 }
 // word의 pos가 1인지 0인지 return
 

@@ -30,6 +30,7 @@ int linking_loader(int num_files, char* file1, char* file2, char* file3){
     char* files[3] = {file1, file2, file3};
     linker_pass1(num_files, files);
     linker_pass2(num_files, files);
+    return 0;
 }
 // main function of linking_loader
 

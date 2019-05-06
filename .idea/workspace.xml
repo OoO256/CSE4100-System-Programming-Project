@@ -28,8 +28,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/run.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="187" column="62" selection-start-line="187" selection-start-column="62" selection-end-line="187" selection-end-column="62" />
+            <state relative-caret-position="265">
+              <caret line="89" column="13" selection-start-line="89" selection-start-column="13" selection-end-line="89" selection-end-column="13" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
                 <element signature="e#4032#4623#0" expanded="true" />
@@ -101,8 +101,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/linking_loader.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1938">
-              <caret line="127" column="45" lean-forward="true" selection-start-line="127" selection-start-column="45" selection-end-line="127" selection-end-column="45" />
+            <state relative-caret-position="300">
+              <caret line="108" column="1" lean-forward="true" selection-start-line="108" selection-start-column="1" selection-end-line="108" selection-end-column="1" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -236,12 +236,12 @@
       <workItem from="1556967744868" duration="21912000" />
       <workItem from="1557051687723" duration="34059000" />
       <workItem from="1557124213247" duration="8502000" />
-      <workItem from="1557136590943" duration="8355000" />
+      <workItem from="1557136590943" duration="8579000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="79051000" />
+    <option name="totallyTimeSpent" value="79275000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -259,7 +259,7 @@
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23782559" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="0" visible="true" weight="0.2854145" />
+      <window_info anchor="bottom" id="Messages" order="0" weight="0.2854145" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" weight="0.23609653" />
       <window_info anchor="bottom" id="Run" order="3" weight="0.27806926" />
@@ -268,7 +268,7 @@
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="7" weight="0.32952183" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.45330536" />
+      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.45330536" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.32952183" />
       <window_info anchor="bottom" id="CMake" order="12" weight="0.3253638" />
@@ -310,7 +310,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/linking_loader.c</url>
-          <line>180</line>
+          <line>181</line>
           <option name="timeStamp" value="26" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
@@ -320,17 +320,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/run.c</url>
-          <line>331</line>
+          <line>332</line>
           <option name="timeStamp" value="71" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/run.c</url>
-          <line>580</line>
+          <line>581</line>
           <option name="timeStamp" value="72" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/run.c</url>
-          <line>180</line>
+          <line>181</line>
           <option name="timeStamp" value="73" />
         </line-breakpoint>
       </breakpoints>
@@ -674,8 +674,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/linking_loader.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1938">
-          <caret line="127" column="45" lean-forward="true" selection-start-line="127" selection-start-column="45" selection-end-line="127" selection-end-column="45" />
+        <state relative-caret-position="300">
+          <caret line="108" column="1" lean-forward="true" selection-start-line="108" selection-start-column="1" selection-end-line="108" selection-end-column="1" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -684,8 +684,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/run.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="187" column="62" selection-start-line="187" selection-start-column="62" selection-end-line="187" selection-end-column="62" />
+        <state relative-caret-position="265">
+          <caret line="89" column="13" selection-start-line="89" selection-start-column="13" selection-end-line="89" selection-end-column="13" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
             <element signature="e#4032#4623#0" expanded="true" />
