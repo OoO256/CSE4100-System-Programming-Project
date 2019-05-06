@@ -167,9 +167,11 @@ static void store(uint32_t TA, uint32_t val){
 
 int run(){
     const int is_input_test_device_ready = 1;
+    // 디바이스가 준비되었는지 저장
 
     uint8_t device_input[] = {'I', 'N', '\0', '\0', '\0', '\0', '\0', '\0', '\0'};
     int cnt_device_input = 0;
+    // 디바이스의 입력을 저장
 
     if(from_bp == 0) {
         // if this is first run() call
@@ -179,6 +181,7 @@ int run(){
 
     while (1){
         int format;
+        // 현재 inst의 foramt을 저장
 
         word inst = {.b0 = memory[PC], .b1 = memory[PC+1], .b2 = memory[PC+2], .b3 = memory[PC+3]};
         // fetch (m .. m3) to parse

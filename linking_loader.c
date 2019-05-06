@@ -8,9 +8,13 @@
 #include "20171667.h"
 
 unsigned int progaddr = 0;
+// 프로그램의 시작 주소
 unsigned int execute_addr;
+// 실행을 시작할 주소
 int total_length;
+// 프로그램의 총 길리
 struct vector estab;
+// ESTAB
 
 unsigned int hex_from_substring(char* str, int begin, int length){
     char temp[100];
@@ -31,6 +35,7 @@ int linking_loader(int num_files, char* file1, char* file2, char* file3){
 
 int linker_pass1(int num_files, char **files){
     unsigned int csaddr = 0;
+    // CSADDR
     for (int file_idx = 0; file_idx < num_files; file_idx++){
 
         FILE* fp = fopen(files[file_idx], "r");
@@ -39,9 +44,13 @@ int linker_pass1(int num_files, char **files){
         }
 
         char record;
+        // record letter of current line
         char name[6+1];
+        // section name
         unsigned int start_addr, cs_length;
+        // start address, control section length
         char line[100];
+        // one line
         line[0] = '0';
         while (fgets(line, 100, fp) != NULL){
             char defs[6][7];

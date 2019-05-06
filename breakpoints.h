@@ -9,5 +9,4 @@ void set_bp(int idx);
 
 int exist_bp(int idx);
 
-
 #endif //PROJECT_BREAKPOINTS_H
