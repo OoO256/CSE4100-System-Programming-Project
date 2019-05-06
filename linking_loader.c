@@ -12,13 +12,13 @@ unsigned int execute_addr;
 int total_length;
 struct vector estab;
 
-
 unsigned int hex_from_substring(char* str, int begin, int length){
     char temp[100];
     strncpy(temp, str+begin, length);
     temp[length] = '\0';
     return strtol(temp, NULL, 16);
 }
+// extract hex number from substring
 
 int linking_loader(int num_files, char* file1, char* file2, char* file3){
     total_length = 0;
@@ -27,6 +27,7 @@ int linking_loader(int num_files, char* file1, char* file2, char* file3){
     linker_pass1(num_files, files);
     linker_pass2(num_files, files);
 }
+// main function of linking_loader
 
 int linker_pass1(int num_files, char **files){
     unsigned int csaddr = 0;
@@ -53,6 +54,7 @@ int linker_pass1(int num_files, char **files){
             switch (record){
 
                 case 'H':
+                    // in H record, set name of program, cs_length, insert name to estab
                     strncpy(name, line+1, 6);
                     name[6] = '\0';
                     start_addr = hex_from_substring(line, 1+6, 6);
@@ -60,6 +62,7 @@ int linker_pass1(int num_files, char **files){
                     estab.emplace_back(&estab, name, progaddr+csaddr, 1, cs_length);
                     break;
                 case 'D':
+                    // in D record, insert symbol to estab
                     len = strlen(line);
                     num_defs = (strlen(line)-1-1+11)/12;
 
@@ -77,6 +80,7 @@ int linker_pass1(int num_files, char **files){
                 case 'M':
                     break;
                 case 'E':
+                    // in E record, set execute addr and increase csaddr
                     if (strlen(line) >= 1+6+1){
                         execute_addr = hex_from_substring(line, 1, 6);
                     }
@@ -91,15 +95,19 @@ int linker_pass1(int num_files, char **files){
         }
     }
     estab.print(&estab);
+    // print estab
     total_length = csaddr;
+    // total length of program is the last csaddr value
     return 0;
 }
 
 int linker_pass2(int num_files, char **files){
+    // linker_pass2
     unsigned int csaddr = 0;
     for (int file_idx = 0; file_idx < num_files; file_idx++){
 
         struct vector local_estab = vector.new();
+        // for each control section, we have local estab for reference
 
         FILE* fp = fopen(files[file_idx], "r");
         if (fp == NULL){
@@ -125,6 +133,7 @@ int linker_pass2(int num_files, char **files){
             switch (record){
 
                 case 'H':
+                    // in H record, set name of program, cs_length, insert name to local estab
                     strncpy(name, line+1, 6);
                     name[6] = '\0';
                     start_addr = hex_from_substring(line, 1+6, 6);
@@ -136,6 +145,7 @@ int linker_pass2(int num_files, char **files){
                 case 'D':
                     break;
                 case 'R':
+                    // push extref from estab to local estab
                     for (int i = 0; 1+8*i+2 < strlen(line); ++i) {
                         strncpy(name, line+1+8*i+2, 6);
                         name[6] = '\0';
@@ -146,6 +156,7 @@ int linker_pass2(int num_files, char **files){
                     
                     break;
                 case 'T':
+                    // load text
                     start_addr = hex_from_substring(line, 1, 6) + csaddr + progaddr;
                     length = hex_from_substring(line, 1+6, 2);
                     for (int i = 0; i < length; ++i) {
@@ -153,6 +164,7 @@ int linker_pass2(int num_files, char **files){
                     }
                     break;
                 case 'M':
+                    // modify symbol form local estab
                     fflush(stdout);
                     start_addr = hex_from_substring(line, 1, 6) + csaddr + progaddr;
                     length = 6;
