@@ -177,6 +177,33 @@ assembler.c.s:
 	$(MAKE) -f CMakeFiles/20171667.out.dir/build.make CMakeFiles/20171667.out.dir/assembler.c.s
 .PHONY : assembler.c.s
 
+breakpoints.o: breakpoints.c.o
+
+.PHONY : breakpoints.o
+
+# target to build an object file
+breakpoints.c.o:
+	$(MAKE) -f CMakeFiles/20171667.out.dir/build.make CMakeFiles/20171667.out.dir/breakpoints.c.o
+.PHONY : breakpoints.c.o
+
+breakpoints.i: breakpoints.c.i
+
+.PHONY : breakpoints.i
+
+# target to preprocess a source file
+breakpoints.c.i:
+	$(MAKE) -f CMakeFiles/20171667.out.dir/build.make CMakeFiles/20171667.out.dir/breakpoints.c.i
+.PHONY : breakpoints.c.i
+
+breakpoints.s: breakpoints.c.s
+
+.PHONY : breakpoints.s
+
+# target to generate assembly for a file
+breakpoints.c.s:
+	$(MAKE) -f CMakeFiles/20171667.out.dir/build.make CMakeFiles/20171667.out.dir/breakpoints.c.s
+.PHONY : breakpoints.c.s
+
 history.o: history.c.o
 
 .PHONY : history.o
@@ -381,6 +408,9 @@ help:
 	@echo "... assembler.o"
 	@echo "... assembler.i"
 	@echo "... assembler.s"
+	@echo "... breakpoints.o"
+	@echo "... breakpoints.i"
+	@echo "... breakpoints.s"
 	@echo "... history.o"
 	@echo "... history.i"
 	@echo "... history.s"

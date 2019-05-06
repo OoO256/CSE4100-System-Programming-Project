@@ -5,11 +5,11 @@
 #include "20171667.h"
 #include "opcode.h"
 #include "assembler.h"
+#include "breakpoints.h"
 
 #define r1 *addr_to_reg(extract_uint8(inst.b1, 0, 4))
 #define r2 *addr_to_reg(extract_uint8(inst.b1, 4, 8))
 #define WORD0 (word){.all = 0}
-#define INPUT_DATA 1
 //#define DEBUG
 
 const int POS_N = 6;
@@ -96,7 +96,9 @@ static word extract_word(word src, int start, int end){
     return src;
 }
 
-static int32_t A, X, L, PC, B, S, T, SW;
+int32_t A, X, L, PC, B, S, T, SW;
+int from_bp = 0;
+
 
 int32_t* addr_to_reg(int addr){
     // return address of register
@@ -152,15 +154,17 @@ static void store(uint32_t TA, uint32_t val){
 
 
 int run(){
-    int is_input_test_device_ready = 1;
+    const int is_input_test_device_ready = 1;
 
     uint8_t device_input[] = {'I', 'N', '\0', '\0', '\0', '\0', '\0', '\0', '\0'};
     int cnt_device_input = 0;
 
-    PC = progaddr + execute_addr;
-    L = progaddr + total_length;
+    if(from_bp == 0) {
+        PC = progaddr + execute_addr;
+        L = progaddr + total_length;
+    }
 
-    while (progaddr <= PC && PC < progaddr + total_length){
+    while (1){
         int format;
 
         word inst = {.b0 = memory[PC], .b1 = memory[PC+1], .b2 = memory[PC+2], .b3 = memory[PC+3]};
@@ -191,19 +195,12 @@ int run(){
         fflush(stdout);
 #endif
 
-
-
         int n;
         int bit;
         uint32_t TA;
         uint32_t TV;
 
         switch (format) {
-#ifdef DEBUG
-            dump(0, 0x100);
-            dump(0x1000, 0x1100);
-#endif
-
             case 1:
                 switch (opcode) {
                     case 0xC4:
@@ -459,6 +456,7 @@ int run(){
                     case 0xD8:
                         //RD m           3/4      D8    A [rightmost byte] <-- data         P
                         //                                from device specified by (m)
+                        printf("[RD] : %c\n", device_input[cnt_device_input]);
                         A &= set_word(WORD0, 0, 24).all;
                         A |= device_input[cnt_device_input++];
                         break;
@@ -527,9 +525,11 @@ int run(){
                         // IO
                         if(is_input_test_device_ready){
                             SW = 0 - 1;
+                            printf("[TD] : success\n");
                         }
                         else{
                             SW = 0;
+                            printf("[TD] : failed\n");
                         }
                         break;
                     case 0x2C:
@@ -540,7 +540,7 @@ int run(){
                     case 0xDC:
                         //WD m           3/4      DC    Device specified by (m) <-- (A)[RMB]     P
                         // IO
-                        printf("device write : %02X\n", (uint8_t)A);
+                        printf("[WD] : %c\n", (uint8_t)A);
                         break;
                     default:
                         printf("not supported opcode!\n");
@@ -551,6 +551,23 @@ int run(){
             default:
                 break;
         }
+#ifdef DEBUG
+        print_reg();
+        printf("after TA : %04X\n", TA);
+        printf("deref TA : %06X\n", deref(TA));
+#endif
+
+        if(PC < progaddr || progaddr + total_length <= PC){
+            print_reg();
+            printf("End Program\n");
+            from_bp = 0;
+            return 0;
+        }
+        else if(exist_bp(PC)){
+            print_reg();
+            printf("Stop at checkpoint[%X]\n", PC);
+            from_bp = 1;
+            return 0;
+        }
     }
-    print_reg();
 }

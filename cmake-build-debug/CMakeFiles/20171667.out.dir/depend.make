@@ -4,6 +4,7 @@
 CMakeFiles/20171667.out.dir/20171667.c.o: ../20171667.c
 CMakeFiles/20171667.out.dir/20171667.c.o: ../20171667.h
 CMakeFiles/20171667.out.dir/20171667.c.o: ../assembler.h
+CMakeFiles/20171667.out.dir/20171667.c.o: ../breakpoints.h
 CMakeFiles/20171667.out.dir/20171667.c.o: ../history.h
 CMakeFiles/20171667.out.dir/20171667.c.o: ../linking_loader.h
 CMakeFiles/20171667.out.dir/20171667.c.o: ../memory.h
@@ -16,6 +17,10 @@ CMakeFiles/20171667.out.dir/assembler.c.o: ../assembler.c
 CMakeFiles/20171667.out.dir/assembler.c.o: ../assembler.h
 CMakeFiles/20171667.out.dir/assembler.c.o: ../opcode.h
 CMakeFiles/20171667.out.dir/assembler.c.o: ../symbol.h
+
+CMakeFiles/20171667.out.dir/breakpoints.c.o: ../20171667.h
+CMakeFiles/20171667.out.dir/breakpoints.c.o: ../breakpoints.c
+CMakeFiles/20171667.out.dir/breakpoints.c.o: ../breakpoints.h
 
 CMakeFiles/20171667.out.dir/history.c.o: ../20171667.h
 CMakeFiles/20171667.out.dir/history.c.o: ../history.c
@@ -37,6 +42,7 @@ CMakeFiles/20171667.out.dir/opcode.c.o: ../opcode.h
 
 CMakeFiles/20171667.out.dir/run.c.o: ../20171667.h
 CMakeFiles/20171667.out.dir/run.c.o: ../assembler.h
+CMakeFiles/20171667.out.dir/run.c.o: ../breakpoints.h
 CMakeFiles/20171667.out.dir/run.c.o: ../linking_loader.h
 CMakeFiles/20171667.out.dir/run.c.o: ../memory.h
 CMakeFiles/20171667.out.dir/run.c.o: ../opcode.h

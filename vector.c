@@ -60,7 +60,7 @@ static void print(struct vector* this){
             total_length += this->data[i].length;
         }
         else{
-            printf("      \t %6s\t %04X\t %04X\n", this->data[i].name, this->data[i].addr, this->data[i].length);
+            printf("      \t %6s\t %04X\t     \n", this->data[i].name, this->data[i].addr);
         }
     }
 

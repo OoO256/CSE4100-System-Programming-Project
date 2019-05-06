@@ -6,6 +6,7 @@
 #include "symbol.h"
 #include "linking_loader.h"
 #include "run.h"
+#include "breakpoints.h"
 
 #define COMMAND_IS(x) (!strcmp(command, (x)))
 
@@ -234,6 +235,9 @@ void parseCommand() {
                 if (run() == SUCCESSFUL_RETURN){
                     addHistory(commandLine);
                 }
+            }else if(COMMAND_IS("bp")){
+                print_bp();
+                addHistory(commandLine);
             }
             else {
                 printf("Syntax error!\n");
@@ -275,6 +279,19 @@ void parseCommand() {
 
                 if(linking_loader(num_files, files[0], files[1], files[2]) == SUCCESSFUL_RETURN)
                     addHistory(commandLine);
+            }
+            else if(COMMAND_IS("bp")
+                && isOneWord(word[0])
+                && !strcmp(word[0], "clear")
+                ){
+                clear_bp();
+                addHistory(commandLine);
+            }
+            else if(COMMAND_IS("bp")
+                    && isHexString(word[0])
+                    ){
+                set_bp((int)strtol(word[0], NULL, 16));
+                addHistory(commandLine);
             }
             else {
                 printf("Syntax error!\n");
