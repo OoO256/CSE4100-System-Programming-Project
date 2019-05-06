@@ -18,6 +18,7 @@ static int emplace_back (struct vector* this, char name[7], unsigned int addr, i
     this->data[this->size - 1].length = length;
     return 0;
 }
+// emplace_back method for vector
 
 static external_symbol* get (struct vector* this, int idx){
 
@@ -27,6 +28,7 @@ static external_symbol* get (struct vector* this, int idx){
 
     return &(this->data[idx]);
 }
+// get method for vector
 
 static external_symbol* find (struct vector* this, char name[7]){
 
@@ -42,6 +44,7 @@ static external_symbol* find (struct vector* this, char name[7]){
     }
     return NULL;
 }
+// find element with name
 
 static void print(struct vector* this){
     printf("control\t symbol\t address\t length\n");
@@ -69,6 +72,7 @@ static void print(struct vector* this){
     printf("\n");
     printf("total length : %X\n", total_length);
 }
+// print all extab
 
 static struct vector new(){
 
@@ -81,5 +85,6 @@ static struct vector new(){
             .find = &find
     };
 }
+// construct vector object
 
 const struct vector_class vector = {.new = &new};

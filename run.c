@@ -18,6 +18,7 @@ const int POS_X = 0;
 const int POS_B = 1;
 const int POS_P = 2;
 const int POS_E = 3;
+// 각 flag의 위치
 
 typedef struct word{
     union{
@@ -30,12 +31,14 @@ typedef struct word{
         uint32_t all;
     };
 }word;
+// big endian 형식인 4바이트 정수
 
 struct Float{
     u_int64_t frac : 36;
     u_int64_t exp : 11;
     u_int64_t sign : 1;
 };
+// float를 저장하는 구조체
 
 static uint8_t set_uint8(uint8_t src, int start, int end){
 
@@ -44,6 +47,7 @@ static uint8_t set_uint8(uint8_t src, int start, int end){
     }
     return src;
 }
+// uint8의 [start, end)를 1로 set
 
 static word set_word(word src, int start, int end){
 
@@ -63,10 +67,12 @@ static word set_word(word src, int start, int end){
     }
     return src;
 }
+// word의 [start, end)를 1로 set
 
 static int check_uint8(uint8_t src, int pos){
     return (src & (0b10000000 >> pos)) != 0;
 }
+// uint8의 pos가 1인지 0인지 return
 
 static int check_word(word src, int pos){
     if(pos < 8){
@@ -82,12 +88,14 @@ static int check_word(word src, int pos){
         return check_uint8(src.b3, pos - 24);
     }
 }
+// word의 pos가 1인지 0인지 return
 
 static uint8_t extract_uint8(uint8_t src, int start, int end){
     src &= set_uint8(0, start, end);
     src >>= 8-end;
     return src;
 }
+// uint8에서 [start, end)범위의 비트를 추출
 
 static word extract_word(word src, int start, int end){
 
@@ -95,14 +103,15 @@ static word extract_word(word src, int start, int end){
     src.all >>= 32 - end;
     return src;
 }
+// word에서 [start, end)범위의 비트를 추출
 
 int32_t A, X, L, PC, B, S, T, SW;
+// 레지스터 변수
 int from_bp = 0;
-
+// breakpoint로 부터 실행인지, 첫 실행인지 저장
 
 int32_t* addr_to_reg(int addr){
-    // return address of register
-    // if ew cant find, return NO_REGISTER
+    // return pointer of register of given addr
 
     switch (addr) {
         case 0:
@@ -127,6 +136,7 @@ int32_t* addr_to_reg(int addr){
 }
 
 static void print_reg(){
+    // print information of register
     printf("A : %06X  ", A);
     printf("X : %06X  \n", X);
     printf("L : %06X  ", L);
@@ -137,6 +147,7 @@ static void print_reg(){
 }
 
 static uint32_t deref(uint32_t src){
+    // derefernce src and fetch 3 byte
     word w = {.all = src};
     w.b0 = 0;
 
@@ -146,6 +157,7 @@ static uint32_t deref(uint32_t src){
 }
 
 static void store(uint32_t TA, uint32_t val){
+    // store val into TA(target addr)
     word w = {.all = val};
     memory[TA] = w.b1;
     memory[TA+1] = w.b2;
@@ -160,6 +172,7 @@ int run(){
     int cnt_device_input = 0;
 
     if(from_bp == 0) {
+        // if this is first run() call
         PC = progaddr + execute_addr;
         L = progaddr + total_length;
     }
@@ -168,10 +181,12 @@ int run(){
         int format;
 
         word inst = {.b0 = memory[PC], .b1 = memory[PC+1], .b2 = memory[PC+2], .b3 = memory[PC+3]};
+        // fetch (m .. m3) to parse
         word disp12 = {.all = extract_word(inst, 12, 24).all};
         word disp20 = {.all = extract_word(inst, 12, 32).all};
         uint8_t opcode = extract_uint8(inst.b0, 0, 6) << 2;
         format = get_format_from_opcode(opcode);
+        // get format info from opcode.c
 
         PC += format;
         if(format == 3 && check_uint8(inst.b1, POS_E)){
@@ -198,7 +213,9 @@ int run(){
         int n;
         int bit;
         uint32_t TA;
+        // target address
         uint32_t TV;
+        // target value
 
         switch (format) {
             case 1:
@@ -325,13 +342,16 @@ int run(){
 
                 switch (extract_uint8(inst.b0, 6, 8)) {
                     case 0b00000001:
+                        // imm addressing
                         TV = TA;
                         break;
                     case 0b00000000:
                     case 0b00000011:
+                        // simple addressing
                         TV = deref(TA);
                         break;
                     case 0b00000010:
+                        // indirect addressing
                         TA = deref(TA);
                         TV = deref(TA);
                         break;
@@ -558,12 +578,14 @@ int run(){
 #endif
 
         if(PC < progaddr || progaddr + total_length <= PC){
+            // out of program
             print_reg();
             printf("End Program\n");
             from_bp = 0;
             return 0;
         }
         else if(exist_bp(PC)){
+            // break point hit
             print_reg();
             printf("Stop at checkpoint[%X]\n", PC);
             from_bp = 1;

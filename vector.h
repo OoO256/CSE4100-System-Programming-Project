@@ -12,6 +12,7 @@ typedef struct node_external_symbol{
     int is_control_section;
     int length;
 }external_symbol;
+// node for external symbol
 
 
 struct vector {
@@ -24,12 +25,11 @@ struct vector {
     external_symbol* (*find) (struct vector* this, char name[7]);
     void (*print)(struct vector* this);
 };
+// vector object
 
 extern const struct vector_class{
     struct vector (*new)(void);
 } vector;
-
-
-
+// to make vector object
 
 #endif //PROJECT_HASHTABLE_H

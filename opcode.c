@@ -145,6 +145,8 @@ node_instruction* getInst(char* mnemonic) {
 }
 
 int get_format_from_opcode(int opcode) {
+    // return format of opcode
+    // 3과 4는 구분하지 않는다.
     switch (opcode) {
         case 0xC4:
         case 0xC0:
